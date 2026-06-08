@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { CONTACT_PHONE, CONTACT_PHONE_HREF } from "@/lib/constants";
 
 const steps = [
@@ -60,7 +61,7 @@ export default function HowIWork() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="grid lg:grid-cols-2 gap-12 xl:gap-20 items-start">
 
-          {/* Leva kolona — naslov, opis, dugmad */}
+          {/* Leva kolona — naslov, opis, slika, dugmad */}
           <div className="lg:sticky lg:top-24">
             <p className="text-orange-500 text-xs font-semibold tracking-widest uppercase mb-3">
               Kako radim
@@ -68,10 +69,20 @@ export default function HowIWork() {
             <h2 className="text-3xl sm:text-4xl font-black text-white mb-4">
               Standard rada koji pravi razliku
             </h2>
-            <p className="text-gray-400 text-base leading-relaxed mb-10">
+            <p className="text-gray-400 text-base leading-relaxed mb-6">
               Svaki servis radim po jasnim koracima kako bih obezbedio vrhunski
               kvalitet, sigurnost i dugotrajne rezultate.
             </p>
+
+            <div className="relative h-52 sm:h-64 rounded-2xl overflow-hidden mb-8">
+              <Image
+                src="/12029.png"
+                alt="FRIONI servis klima uređaja"
+                fill
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#07091a]/50 via-transparent to-transparent" />
+            </div>
 
             {/* Dugme samo na desktopu */}
             <a

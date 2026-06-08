@@ -93,7 +93,9 @@ export default function PersonalService() {
                   <Image src="/12031.png" alt="Sigurnost" fill className="object-contain" />
                 </div>
                 <div>
-                  <p className="text-white font-bold text-sm leading-tight">Lično vođen servis</p>
+                  <p className="text-white font-bold text-sm leading-tight">
+                    Lično vođen servis klima
+                  </p>
                   <p className="text-gray-400 text-xs mt-0.5">
                     Svaki posao vodim lično, bez posrednika
                   </p>
@@ -107,11 +109,9 @@ export default function PersonalService() {
               O servisu
             </p>
             <h2 className="text-3xl sm:text-4xl font-black text-white mb-4">
-              Lično vođen servis koji pravi razliku
+              Lično vođen klima servis koji pravi razliku
             </h2>
-            <p className="text-gray-400 text-base leading-relaxed mb-2">
-              Moje ime je Nikola.
-            </p>
+            <p className="text-gray-400 text-base leading-relaxed mb-2">Moje ime je Nikola.</p>
             <p className="text-gray-400 text-base leading-relaxed mb-4">
               FRIONI nije veliki servisni centar. Većinu intervencija obavljam lično i odgovaram za
               kvalitet rada od prvog kontakta do završne provere uređaja.

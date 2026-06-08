@@ -46,7 +46,7 @@ export default function Header() {
             <a
               key={link.href}
               href={link.href}
-              className="text-gray-400 hover:text-white text-sm font-medium transition-colors"
+              className="text-gray-200 hover:text-white text-sm font-bold transition-colors"
             >
               {link.label}
             </a>
@@ -55,7 +55,8 @@ export default function Header() {
 
         <a
           href={CONTACT_PHONE_HREF}
-          className="hidden md:block bg-gradient-to-r from-orange-500 to-orange-600 text-white px-5 py-2.5 rounded-lg text-sm font-bold hover:opacity-90 hover:shadow-lg hover:shadow-orange-500/25 transition-all"
+          className="hidden md:block text-white px-5 py-2.5 rounded-lg text-sm font-bold hover:opacity-90 hover:shadow-lg transition-all"
+          style={{ backgroundImage: "linear-gradient(to right, #1d4ed8 35%, #ea580c 65%)" }}
         >
           {CONTACT_PHONE}
         </a>
@@ -93,7 +94,8 @@ export default function Header() {
           ))}
           <a
             href={CONTACT_PHONE_HREF}
-            className="mt-4 block bg-gradient-to-r from-orange-500 to-orange-600 text-white text-center px-5 py-3 rounded-lg font-bold text-sm"
+            className="mt-4 block text-white text-center px-5 py-3 rounded-lg font-bold text-sm"
+            style={{ backgroundImage: "linear-gradient(to right, #1d4ed8 35%, #ea580c 65%)" }}
           >
             {CONTACT_PHONE}
           </a>

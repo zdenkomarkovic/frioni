@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
+import TrustBadges from "@/components/TrustBadges";
 import Services from "@/components/Services";
 import PersonalService from "@/components/PersonalService";
 import HowIWork from "@/components/HowIWork";
@@ -14,6 +15,7 @@ export default function HomePage() {
       <Header />
       <main>
         <Hero />
+        <TrustBadges />
         <PersonalService />
         <HowIWork />
         <Services />

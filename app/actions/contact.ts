@@ -46,8 +46,50 @@ export async function submitContact(
     };
   }
 
-  // TODO: Ovde dodati slanje emaila (Resend, Nodemailer, itd.)
-  console.log("Novi zahtev za servis:", result.data);
+  const { ime, email, telefon, tipServisa, brojKlima, adresa, opstina, opis } = result.data;
+
+  const emailBody = [
+    `<h2>Novi zahtev za servis</h2>`,
+    `<p><strong>Ime i prezime:</strong> ${ime}</p>`,
+    `<p><strong>Telefon:</strong> ${telefon}</p>`,
+    `<p><strong>Email:</strong> ${email}</p>`,
+    tipServisa ? `<p><strong>Tip servisa:</strong> ${tipServisa}</p>` : "",
+    brojKlima ? `<p><strong>Broj klima uređaja:</strong> ${brojKlima}</p>` : "",
+    adresa ? `<p><strong>Adresa:</strong> ${adresa}</p>` : "",
+    opstina ? `<p><strong>Opština:</strong> ${opstina}</p>` : "",
+    opis ? `<p><strong>Opis problema:</strong> ${opis}</p>` : "",
+  ].filter(Boolean).join("\n");
+
+  const res = await fetch("https://api.mailjet.com/v3.1/send", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Basic ${Buffer.from(
+        `${process.env.MAILJET_API_KEY}:${process.env.MAILJET_SECRET_KEY}`
+      ).toString("base64")}`,
+    },
+    body: JSON.stringify({
+      Messages: [
+        {
+          From: {
+            Email: process.env.SITE_MAIL_SENDER,
+            Name: "FRIONI Servis",
+          },
+          To: [{ Email: process.env.SITE_MAIL_RECEIVER }],
+          ReplyTo: { Email: email, Name: ime },
+          Subject: `Novi zahtev za servis – ${ime}`,
+          HTMLPart: emailBody,
+        },
+      ],
+    }),
+  });
+
+  if (!res.ok) {
+    return {
+      success: false,
+      message: "Greška pri slanju. Pokušajte ponovo ili nas pozovite direktno.",
+    };
+  }
 
   return {
     success: true,
