@@ -9,7 +9,7 @@ export default function Hero() {
       <div className="lg:hidden pt-20">
         <div className="bg-[#07091a] px-4 pt-6 pb-4">
           <h1 className="text-orange-500 text-sm font-semibold tracking-widest uppercase">
-            Profesionalni servis klima uređaja frioni u Beogradu
+            Frioni servis klima uređaja u Beogradu
           </h1>
         </div>
         <div className="relative w-full aspect-[4/3]">

@@ -6,6 +6,8 @@ import PersonalService from "@/components/PersonalService";
 import HowIWork from "@/components/HowIWork";
 import Pricing from "@/components/Pricing";
 import Reviews from "@/components/Reviews";
+import Stats from "@/components/Stats";
+import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
 
 export default function HomePage() {
@@ -16,11 +18,13 @@ export default function HomePage() {
         <Hero />
         <TrustBadges />
         <PersonalService />
-        <HowIWork />
         <Services />
+        <HowIWork />
+        <Stats />
 
         <Pricing />
         <Reviews />
+        <FAQ />
       </main>
       <Footer />
     </>
