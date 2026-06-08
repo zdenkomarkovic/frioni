@@ -65,7 +65,7 @@ export async function submitIzvestaj(
           <!-- Header -->
           <tr>
             <td style="background:linear-gradient(135deg,#1d4ed8,#ea580c);padding:28px 40px;text-align:center;">
-              <img src="https://frioni.rs/logo.png" alt="FRIONI" height="70" style="display:block;margin:0 auto 8px;" />
+              <img src="https://frioni.vercel.app/logo.png" alt="FRIONI" height="70" style="display:block;margin:0 auto 8px;" />
               <p style="margin:0;color:rgba(255,255,255,0.85);font-size:13px;">Servis i održavanje klima uređaja</p>
             </td>
           </tr>
