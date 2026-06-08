@@ -62,7 +62,7 @@ export default function HowIWork() {
         <div className="grid lg:grid-cols-2 gap-12 xl:gap-20 items-start">
 
           {/* Leva kolona — naslov, opis, slika, dugmad */}
-          <div className="lg:sticky lg:top-24">
+          <div className="lg:order-2 lg:sticky lg:top-24">
             <p className="text-orange-500 text-xs font-semibold tracking-widest uppercase mb-3">
               Kako radim
             </p>
@@ -97,7 +97,7 @@ export default function HowIWork() {
           </div>
 
           {/* Desna kolona — koraci */}
-          <div className="space-y-3">
+          <div className="lg:order-1 space-y-3">
             {steps.map((step) => (
               <div
                 key={step.num}

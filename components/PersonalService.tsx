@@ -139,7 +139,7 @@ export default function PersonalService() {
             </div>
 
             <a
-              href="#kontakt"
+              href="/kontakt"
               className="mt-8 inline-block text-white px-6 py-3 rounded-xl font-bold text-sm hover:opacity-90 transition-all"
               style={{ backgroundImage: "linear-gradient(to right, #1d4ed8 35%, #ea580c 65%)" }}
             >

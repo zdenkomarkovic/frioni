@@ -6,11 +6,11 @@ import Image from "next/image";
 import { CONTACT_PHONE_HREF, CONTACT_PHONE } from "@/lib/constants";
 
 const navLinks = [
-  { href: "#usluge", label: "Usluge" },
-  { href: "#o-servisu", label: "O servisu" },
-  { href: "#cene", label: "Cene" },
-  { href: "#recenzije", label: "Recenzije" },
-  { href: "#kontakt", label: "Kontakt" },
+  { href: "/", label: "Početna" },
+  { href: "/#o-servisu", label: "O servisu" },
+  { href: "/#usluge", label: "Usluge" },
+  { href: "/#cene", label: "Cene" },
+  { href: "/kontakt", label: "Kontakt" },
 ];
 
 export default function Header() {

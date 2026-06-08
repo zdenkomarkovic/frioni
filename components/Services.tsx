@@ -73,7 +73,7 @@ export default function Services() {
 
         <div className="mt-10 text-center">
           <a
-            href="#kontakt"
+            href="/kontakt"
             className="inline-block text-white px-8 py-4 rounded-xl font-bold hover:opacity-90 hover:shadow-xl hover:shadow-orange-500/25 transition-all"
             style={{ backgroundImage: "linear-gradient(to right, #1d4ed8 35%, #ea580c 65%)" }}
           >

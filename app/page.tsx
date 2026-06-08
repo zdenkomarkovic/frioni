@@ -6,7 +6,6 @@ import PersonalService from "@/components/PersonalService";
 import HowIWork from "@/components/HowIWork";
 import Pricing from "@/components/Pricing";
 import Reviews from "@/components/Reviews";
-import ContactForm from "@/components/ContactForm";
 import Footer from "@/components/Footer";
 
 export default function HomePage() {
@@ -22,7 +21,6 @@ export default function HomePage() {
 
         <Pricing />
         <Reviews />
-        <ContactForm />
       </main>
       <Footer />
     </>

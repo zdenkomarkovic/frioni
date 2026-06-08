@@ -56,7 +56,7 @@ export default function Hero() {
               POZOVI ODMAH
             </a>
             <Link
-              href="#kontakt"
+              href="/kontakt"
               className="text-white px-2 py-2 rounded-xl font-bold text-xs text-center whitespace-nowrap flex items-center justify-center"
               style={{ backgroundImage: "linear-gradient(to right, #1d4ed8 35%, #ea580c 65%)" }}
             >
@@ -116,7 +116,7 @@ export default function Hero() {
                 POZOVI ODMAH
               </a>
               <Link
-                href="#kontakt"
+                href="/kontakt"
                 className="text-white px-8 py-4 rounded-xl font-bold text-base text-center hover:opacity-90 transition-all active:scale-95"
                 style={{ backgroundImage: "linear-gradient(to right, #1d4ed8 35%, #ea580c 65%)" }}
               >

@@ -1,17 +1,18 @@
 import Image from "next/image";
-import { CONTACT_PHONE, CONTACT_PHONE_HREF, CONTACT_EMAIL, CONTACT_ADDRESS } from "@/lib/constants";
+import { CONTACT_PHONE, CONTACT_PHONE_HREF, CONTACT_VIBER_HREF, CONTACT_WHATSAPP_HREF, CONTACT_EMAIL, CONTACT_ADDRESS } from "@/lib/constants";
 
 const navLinks = [
-  { href: "#usluge", label: "Usluge" },
-  { href: "#o-servisu", label: "O servisu" },
-  { href: "#cene", label: "Cene" },
-  { href: "#recenzije", label: "Recenzije" },
-  { href: "#kontakt", label: "Kontakt" },
+  { href: "/", label: "Početna" },
+  { href: "/#o-servisu", label: "O servisu" },
+  { href: "/#usluge", label: "Usluge" },
+  { href: "/#cene", label: "Cene" },
+  { href: "/kontakt", label: "Kontakt" },
 ];
 
 export default function Footer() {
   return (
-    <footer className="bg-[#040710] border-t border-white/5">
+    <footer className="bg-[#040710]">
+      <div className="h-px w-full" style={{ backgroundImage: "linear-gradient(to right, #1d4ed8 35%, #ea580c 65%)" }} />
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-14">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
           <div className="lg:col-span-2">
@@ -57,6 +58,24 @@ export default function Footer() {
                   className="text-gray-400 hover:text-orange-400 text-sm transition-colors"
                 >
                   {CONTACT_PHONE}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={CONTACT_VIBER_HREF}
+                  className="text-gray-400 hover:text-purple-400 text-sm transition-colors"
+                >
+                  Viber
+                </a>
+              </li>
+              <li>
+                <a
+                  href={CONTACT_WHATSAPP_HREF}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-green-400 text-sm transition-colors"
+                >
+                  WhatsApp
                 </a>
               </li>
               <li>

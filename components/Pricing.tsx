@@ -88,7 +88,7 @@ export default function Pricing() {
 
             <div className="flex flex-col sm:flex-row gap-3">
               <a
-                href="#kontakt"
+                href="/kontakt"
                 className="flex items-center justify-center gap-2 text-white px-6 py-3 rounded-xl font-bold text-sm hover:opacity-90 transition-all"
                 style={{ backgroundImage: "linear-gradient(to right, #1d4ed8 35%, #ea580c 65%)" }}
               >
