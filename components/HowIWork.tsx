@@ -81,7 +81,6 @@ export default function HowIWork() {
                 fill
                 className="object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#07091a]/50 via-transparent to-transparent" />
             </div>
 
             {/* Dugme samo na desktopu */}

@@ -84,7 +84,6 @@ export default function PersonalService() {
                 fill
                 className="object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#050810]/80 via-transparent to-transparent" />
             </div>
 
             <div className="absolute -bottom-5 left-4 right-4 sm:left-6 sm:right-6 bg-[#0c1220]/95 backdrop-blur-sm border border-white/10 rounded-xl p-4 shadow-2xl">
