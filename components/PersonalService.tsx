@@ -1,6 +1,7 @@
+import React from "react";
 import Image from "next/image";
 
-const features = [
+const features: { icon: React.ReactNode; title: string; desc: React.ReactNode }[] = [
   {
     icon: (
       <svg
@@ -33,7 +34,7 @@ const features = [
       </svg>
     ),
     title: "Jasna komunikacija",
-    desc: "Objasnim stanje uređaja i predložim rešenje pre početka rada.",
+    desc: "Objašnjavam stanje uređaja i predlažem rešenje pre početka rada.",
   },
   {
     icon: (
@@ -50,7 +51,7 @@ const features = [
       </svg>
     ),
     title: "Bez neprijatnih iznenađenja",
-    desc: "Realna procena, fer cena i dogovor bez skrivenih troškova.",
+    desc: <>Pre početka rada dobijate <strong className="text-white">jasnu procenu</strong> i objašnjenje predloženih radova. <strong className="text-white">Bez skrivenih troškova</strong> i neprijatnih iznenađenja.</>,
   },
   {
     icon: (
@@ -67,7 +68,7 @@ const features = [
       </svg>
     ),
     title: "Dugotrajan odnos",
-    desc: "Vodimo istoriju svakog uređaja i uvek znate kome da se obratite.",
+    desc: <>Cilj nije jedna intervencija. Cilj je da imate <strong className="text-white">pouzdan kontakt</strong> za održavanje uređaja i u godinama koje dolaze.</>,
   },
 ];
 
@@ -108,16 +109,13 @@ export default function PersonalService() {
               O servisu
             </p>
             <h2 className="text-3xl sm:text-4xl font-black text-white mb-4">
-              Lično vođen klima servis koji pravi razliku
+              Lična odgovornost umesto masovnog rada
             </h2>
-            <p className="text-gray-400 text-base leading-relaxed mb-2">Moje ime je Nikola.</p>
             <p className="text-gray-400 text-base leading-relaxed mb-4">
-              FRIONI nije veliki servisni centar. Većinu intervencija obavljam lično i odgovaram za
-              kvalitet rada od prvog kontakta do završne provere uređaja.
+              Moje ime je Nikola. Većinu intervencija obavljam <strong className="text-white">lično</strong>. To znači da ne prebacujem <strong className="text-white">odgovornost</strong> sa jednog servisera na drugog i da iza svakog urađenog posla stojim <strong className="text-white">svojim imenom</strong>.
             </p>
             <p className="text-gray-400 text-base leading-relaxed mb-8">
-              Ne žurim sa intervencijama. Svakoj klimi posvećujem dvostruko vremena kako bi posao
-              bio urađen temeljno i uredno.
+              Ne žurim sa intervencijama. Svakom uređaju posvećujem dovoljno vremena kako bi posao bio urađen <strong className="text-white">temeljno</strong> i uredno.
             </p>
 
             <div className="space-y-3">

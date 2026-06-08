@@ -58,7 +58,7 @@ export default function Pricing() {
               Transparentne cene
             </p>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-4">
-              Investicija koja se isplati
+              Cene usluga
             </h2>
             <p className="text-gray-400 text-base leading-relaxed mb-8">
               Investicija u čist vazduh i pouzdan rad klima sistema.

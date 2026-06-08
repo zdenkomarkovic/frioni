@@ -70,8 +70,7 @@ export default function HowIWork() {
               Standard rada koji pravi razliku
             </h2>
             <p className="text-gray-400 text-base leading-relaxed mb-6">
-              Svaki servis radim po jasnim koracima kako bih obezbedio vrhunski
-              kvalitet, sigurnost i dugotrajne rezultate.
+              Svaki uređaj prolazi <strong className="text-white">isti postupak</strong> provere, servisiranja i <strong className="text-white">završne kontrole</strong> kako bi kvalitet rada bio dosledan na svakoj adresi.
             </p>
 
             <div className="relative h-52 sm:h-64 rounded-2xl overflow-hidden mb-8">
