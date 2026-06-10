@@ -164,7 +164,7 @@ export default function Footer() {
               href="https://manikamwebsolutions.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-gray-400 transition-colors"
+              className="hover:text-orange-400 hover:underline transition-colors"
             >
               Manikam Web Solutions
             </a>
