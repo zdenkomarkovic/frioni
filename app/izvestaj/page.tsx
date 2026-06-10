@@ -136,7 +136,7 @@ function buildReportHTML(d: FormData): string {
   <div style="padding:20px 40px;border-top:1px solid #eee;text-align:center;">
     <p style="margin:0 0 6px;font-size:14px;color:#555;">Hvala vam na ukazanom poverenju.</p>
     <p style="margin:0;font-size:16px;font-weight:900;color:#111;letter-spacing:1px;">FRIONI</p>
-    <p style="margin:4px 0 0;font-size:12px;color:#888;">Servis i održavanje klima uređaja · www.frioni.rs</p>
+    <p style="margin:4px 0 0;font-size:12px;color:#888;">Servis i održavanje klima uređaja · <a href="https://www.frioni.rs" style="color:#1d4ed8;text-decoration:none;">www.frioni.rs</a></p>
   </div>
 
   <div style="background:#f8f8f8;padding:14px 40px;border-top:1px solid #e0e0e0;text-align:center;margin-top:16px;">
@@ -272,7 +272,17 @@ export default function IzvestajPage() {
             <button
               onClick={() => {
                 setDone(false);
-                setFormData((prev) => ({ ...prev, brojIntervencije: "" }));
+                setFormData({
+                  brojIntervencije: "",
+                  datum: today(),
+                  ime: "",
+                  adresa: "",
+                  telefon: "",
+                  email: "",
+                  usluge: "",
+                  napomena: "",
+                });
+                setErrors({});
               }}
               className="mt-6 text-white px-6 py-3 rounded-xl font-bold text-sm hover:opacity-90 transition-all"
               style={{ backgroundImage: "linear-gradient(to right, #1d4ed8 35%, #ea580c 65%)" }}
