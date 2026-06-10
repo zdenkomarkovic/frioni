@@ -21,7 +21,7 @@ export type IzvestajFormState = {
 
 export async function submitIzvestaj(
   _prevState: IzvestajFormState,
-  formData: FormData,
+  formData: FormData
 ): Promise<IzvestajFormState> {
   const raw = {
     brojIntervencije: formData.get("brojIntervencije"),
@@ -65,7 +65,7 @@ export async function submitIzvestaj(
           <!-- Header -->
           <tr>
             <td style="background:linear-gradient(135deg,#1d4ed8,#ea580c);padding:28px 40px;text-align:center;">
-              <img src="https://frioni.rs/logo.png" alt="FRIONI" height="70" style="display:block;margin:0 auto 8px;" />
+              <img src="https://frioni.rs/logo.jpg" alt="FRIONI" height="70" style="display:block;margin:0 auto 8px;" />
               <p style="margin:0;color:rgba(255,255,255,0.85);font-size:13px;">Servis i održavanje klima uređaja</p>
             </td>
           </tr>
@@ -130,7 +130,9 @@ export async function submitIzvestaj(
             </td>
           </tr>
 
-          ${napomena ? `
+          ${
+            napomena
+              ? `
           <!-- Napomena -->
           <tr>
             <td style="padding:24px 40px 8px;border-top:1px solid #f0f0f0;">
@@ -138,7 +140,9 @@ export async function submitIzvestaj(
               <p style="margin:0;font-size:14px;color:#333;line-height:1.7;">${napomena}</p>
             </td>
           </tr>
-          ` : ""}
+          `
+              : ""
+          }
 
           <!-- Zahvalnica -->
           <tr>

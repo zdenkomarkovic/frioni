@@ -175,7 +175,7 @@ function ServiceCard({ service }: { service: Service }) {
             service.featured ? "text-orange-400" : "text-white"
           }`}
         >
-          {service.price}
+          od {service.price}
         </span>
       </div>
 

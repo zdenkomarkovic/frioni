@@ -32,7 +32,7 @@ export default function Header() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 h-22 flex items-center justify-between">
         <Link href="/" className="flex items-center">
           <Image
-            src="/logo.png"
+            src="/logo.jpg"
             alt="Frioni logo"
             width={120}
             height={40}
