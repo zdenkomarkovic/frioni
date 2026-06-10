@@ -39,7 +39,7 @@ export default function Services() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="max-w-2xl mb-14">
           <p className="text-orange-500 text-xs font-semibold tracking-widest uppercase mb-3">
-            Naše usluge
+            Moje usluge
           </p>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mb-4">
             Kompletan servis za vaš komfor

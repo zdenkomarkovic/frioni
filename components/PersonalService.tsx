@@ -51,7 +51,13 @@ const features: { icon: React.ReactNode; title: string; desc: React.ReactNode }[
       </svg>
     ),
     title: "Bez neprijatnih iznenađenja",
-    desc: <>Pre početka rada dobijate <strong className="text-white">jasnu procenu</strong> i objašnjenje predloženih radova. <strong className="text-white">Bez skrivenih troškova</strong> i neprijatnih iznenađenja.</>,
+    desc: (
+      <>
+        Pre početka rada dobijate <strong className="text-white">jasnu procenu</strong> i
+        objašnjenje predloženih radova.{" "}
+        <strong className="text-white">Bez skrivenih troškova</strong> i neprijatnih iznenađenja.
+      </>
+    ),
   },
   {
     icon: (
@@ -68,81 +74,138 @@ const features: { icon: React.ReactNode; title: string; desc: React.ReactNode }[
       </svg>
     ),
     title: "Dugotrajan odnos",
-    desc: <>Cilj nije jedna intervencija. Cilj je da imate <strong className="text-white">pouzdan kontakt</strong> za održavanje uređaja i u godinama koje dolaze.</>,
+    desc: (
+      <>
+        Cilj nije jedna intervencija. Cilj je da imate{" "}
+        <strong className="text-white">pouzdan kontakt</strong> za održavanje uređaja i u godinama
+        koje dolaze.
+      </>
+    ),
   },
 ];
 
 export default function PersonalService() {
   return (
     <section id="o-servisu" className="py-20 bg-[#050810]">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 space-y-16 xl:space-y-20">
+        {/* Red 1 – tekst levo, slika desno */}
         <div className="grid lg:grid-cols-2 gap-12 xl:gap-20 items-center">
-          <div className="relative order-2 lg:order-1">
-            <div className="relative h-80 sm:h-[420px] lg:h-[520px] rounded-2xl overflow-hidden">
+          <div>
+            <p className="text-orange-500 text-xs font-semibold tracking-widest uppercase mb-3">
+              O meni
+            </p>
+            <h2 className="text-3xl sm:text-4xl font-black text-white mb-6">
+              Niste pozvali firmu. Pozvali ste mene.
+            </h2>
+            <div className="space-y-4 text-gray-400 text-base leading-relaxed">
+              <p>
+                Moje ime je Nikola. Neću pričati o godinama iskustva niti tvrditi da znam sve, jer
+                svakim danom shvatam koliko još ima da se nauči.
+              </p>
+              <p>
+                Ono što mogu da kažem jeste da sam od 2024. godine gotovo svakodnevno na terenu
+                širom Beograda i okoline. U proseku obavljam oko 5 intervencija dnevno, između 25 i
+                30 nedeljno. Svaki uređaj, svaki prostor i svaki problem donesu nešto novo, zbog
+                čega i danas nastavljam da učim i usavršavam svoj rad.
+              </p>
+              <p>Najčešći komentar koji čujem od klijenata nakon završene intervencije glasi:</p>
+              <blockquote className="border-l-2 border-orange-500 pl-4 italic text-gray-300">
+                „Ali ovo ovako nikad niko nije radio... Malo naprskaju i odu."
+              </blockquote>
+              <p>Upravo iz takvih iskustava nastao je FRIONI.</p>
+            </div>
+          </div>
+
+          <div className="relative">
+            <div className="relative h-80 sm:h-[420px] lg:h-[500px] rounded-2xl overflow-hidden">
               <Image
-                src="/12030.png"
+                src="/omeni.jpg"
                 alt="Lično vođen servis FRIONI"
                 fill
                 className="object-cover"
               />
             </div>
+          </div>
+        </div>
 
-            <div className="absolute -bottom-5 left-4 right-4 sm:left-6 sm:right-6 bg-[#0c1220]/95 backdrop-blur-sm border border-white/10 rounded-xl p-4 shadow-2xl">
-              <div className="flex items-center gap-3">
-                <div className="w-11 h-11 relative flex-shrink-0">
-                  <Image src="/12031.png" alt="Sigurnost" fill className="object-contain" />
+        {/* Red 2 – slika levo (desktop) / ispod teksta (mobilni) */}
+        <div className="space-y-10 pt-6">
+          <div className="grid lg:grid-cols-2 gap-12 xl:gap-20 items-start">
+
+            {/* Slika – mobilni: iza teksta (order-2), desktop: levo (order-1) */}
+            <div className="relative h-80 sm:h-[420px] lg:h-[500px] rounded-2xl overflow-hidden order-2 lg:order-1">
+              <Image
+                src="/omeni2.jpg"
+                alt="Nikola – FRIONI servis klima uređaja"
+                fill
+                className="object-cover object-top"
+              />
+            </div>
+
+            {/* Tekst – mobilni: prvi (order-1), desktop: desno (order-2) */}
+            <div className="order-1 lg:order-2 space-y-4 text-gray-400 text-base leading-relaxed">
+              <p>
+                U vremenu kada je razlika između proizvođača klima uređaja sve manja, a kvalitet
+                uređaja često veoma sličan, najveća razlika više nije u samom uređaju — već u načinu
+                na koji se održava.
+              </p>
+              <p>Moj posao je da uradim sve što je potrebno kako bi uređaj ostao:</p>
+              <ul className="space-y-1 pl-1">
+                {[
+                  "bezbedan za korišćenje",
+                  "higijenski ispravan",
+                  "energetski efikasan",
+                  "pouzdan u radu",
+                  "spreman za godine koje dolaze",
+                ].map((item) => (
+                  <li key={item} className="flex items-center gap-2 text-gray-300">
+                    <span className="w-1.5 h-1.5 rounded-full bg-orange-500 flex-shrink-0" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <p>
+                Svakoj intervenciji pristupam lično. Ne žurim sa poslom da bih stigao na sledeću
+                adresu nekoliko minuta ranije. Važnije mi je da posao bude urađen temeljno, uredno i
+                odgovorno.
+              </p>
+              <p>
+                Kada završim intervenciju, želim da budete sigurni da je urađeno sve što je u tom
+                trenutku bilo moguće i potrebno. To je ideja iza imena FRIONI — ne masovni servis,
+                ne brza zarada, već{" "}
+                <strong className="text-white">
+                  lična odgovornost za svaki uređaj na kome radim
+                </strong>
+                .
+              </p>
+            </div>
+          </div>
+
+          {/* Kartice – jedan red na desktopu (4 kolone), stack na mobilnom */}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {features.map((f) => (
+              <div
+                key={f.title}
+                className="flex flex-col gap-3 p-4 rounded-xl bg-[#0c1220] border border-white/5 hover:border-orange-500/30 transition-all"
+              >
+                <div className="w-9 h-9 rounded-lg bg-blue-500/10 flex items-center justify-center text-blue-400 flex-shrink-0">
+                  {f.icon}
                 </div>
                 <div>
-                  <p className="text-white font-bold text-sm leading-tight">
-                    Lično vođen servis klima
-                  </p>
-                  <p className="text-gray-400 text-xs mt-0.5">
-                    Svaki posao vodim lično, bez posrednika
-                  </p>
+                  <p className="text-white font-semibold text-sm">{f.title}</p>
+                  <p className="text-gray-400 text-xs mt-0.5 leading-relaxed">{f.desc}</p>
                 </div>
               </div>
-            </div>
+            ))}
           </div>
 
-          <div className="order-1 lg:order-2">
-            <p className="text-orange-500 text-xs font-semibold tracking-widest uppercase mb-3">
-              O servisu
-            </p>
-            <h2 className="text-3xl sm:text-4xl font-black text-white mb-4">
-              Lična odgovornost umesto masovnog rada
-            </h2>
-            <p className="text-gray-400 text-base leading-relaxed mb-4">
-              Moje ime je Nikola. Većinu intervencija obavljam <strong className="text-white">lično</strong>. To znači da ne prebacujem <strong className="text-white">odgovornost</strong> sa jednog servisera na drugog i da iza svakog urađenog posla stojim <strong className="text-white">svojim imenom</strong>.
-            </p>
-            <p className="text-gray-400 text-base leading-relaxed mb-8">
-              Ne žurim sa intervencijama. Svakom uređaju posvećujem dovoljno vremena kako bi posao bio urađen <strong className="text-white">temeljno</strong> i uredno.
-            </p>
-
-            <div className="space-y-3">
-              {features.map((f) => (
-                <div
-                  key={f.title}
-                  className="flex items-start gap-4 p-4 rounded-xl bg-[#0c1220] border border-white/5 hover:border-orange-500/30 transition-all"
-                >
-                  <div className="w-9 h-9 rounded-lg bg-blue-500/10 flex items-center justify-center text-blue-400 flex-shrink-0">
-                    {f.icon}
-                  </div>
-                  <div>
-                    <p className="text-white font-semibold text-sm">{f.title}</p>
-                    <p className="text-gray-400 text-xs mt-0.5 leading-relaxed">{f.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <a
-              href="/kontakt"
-              className="mt-8 inline-block text-white px-6 py-3 rounded-xl font-bold text-sm hover:opacity-90 transition-all"
-              style={{ backgroundImage: "linear-gradient(to right, #1d4ed8 35%, #ea580c 65%)" }}
-            >
-              Pošalji zahtev za servis
-            </a>
-          </div>
+          <a
+            href="/kontakt"
+            className="inline-block text-white px-6 py-3 rounded-xl font-bold text-sm hover:opacity-90 transition-all"
+            style={{ backgroundImage: "linear-gradient(to right, #1d4ed8 35%, #ea580c 65%)" }}
+          >
+            Pošalji zahtev za servis
+          </a>
         </div>
       </div>
     </section>

@@ -14,7 +14,7 @@ export default function Hero() {
         </div>
         <div className="relative w-full aspect-[4/3]">
           <Image
-            src="/12024.png"
+            src="/hero.jpg"
             alt="FRIONI servis klima uređaja Beograd"
             fill
             className="object-cover object-center"
@@ -32,8 +32,8 @@ export default function Hero() {
             </span>
           </h2>
           <p className="text-gray-300 text-sm  mb-8">
-            Lično vođen servis klima uređaja sa dugogodišnjim iskustvom i predanošću svakom poslu.
-            Dolazimo tačno kada kažemo.
+            Lično vođen servis klima uređaja sa velikim iskustvom i predanošću svakoj intervenciji.
+            Dolazimo po dogovoru.
           </p>
           <div className="flex flex-row gap-2">
             <a
@@ -70,7 +70,7 @@ export default function Hero() {
       <div className="hidden lg:flex relative h-screen items-end">
         <div className="absolute inset-0">
           <Image
-            src="/12024.png"
+            src="/hero.jpg"
             alt="FRIONI servis klima uređaja Beograd"
             fill
             className="object-cover object-center"
@@ -80,7 +80,7 @@ export default function Hero() {
         <div className="relative w-full max-w-6xl mx-auto px-6 flex justify-end pb-16">
           <div className="max-w-2xl">
             <h1 className="text-orange-500 text-lg font-semibold tracking-widest uppercase mb-5">
-              Profesionalni servis klima uređaja frioni u Beogradu
+              Frioni servis klima uređaja u Beogradu
             </h1>
             <h2 className="text-4xl font-black leading-tight mb-6 text-white">
               KADA SU PRIORITETI SIGURNOST, UREDNOST, POUZDANOST I OSLONAC, POZOVITE{" "}
@@ -92,8 +92,8 @@ export default function Hero() {
               </span>
             </h2>
             <p className="text-gray-200 text-base leading-relaxed mb-10 max-w-lg">
-              Lično vođen servis klima uređaja sa dugogodišnjim iskustvom i predanošću svakom poslu.
-              Dolazimo tačno kada kažemo.
+              Lično vođen servis klima uređaja sa velikim iskustvom i predanošću svakoj
+              intervenciji. Dolazimo po dogovoru.
             </p>
             <div className="flex gap-4">
               <a
