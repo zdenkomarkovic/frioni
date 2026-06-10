@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { CONTACT_PHONE_HREF, CONTACT_PHONE } from "@/lib/constants";
+import { CONTACT_PHONE_HREF } from "@/lib/constants";
 
 const plans = [
   {

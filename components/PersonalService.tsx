@@ -110,7 +110,7 @@ export default function PersonalService() {
               </p>
               <p>Najčešći komentar koji čujem od klijenata nakon završene intervencije glasi:</p>
               <blockquote className="border-l-2 border-orange-500 pl-4 italic text-gray-300">
-                „Ali ovo ovako nikad niko nije radio... Malo naprskaju i odu."
+                „Ali ovo ovako nikad niko nije radio... Malo naprskaju i odu.&rdquo;
               </blockquote>
               <p>Upravo iz takvih iskustava nastao je FRIONI.</p>
             </div>
