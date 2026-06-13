@@ -6,9 +6,10 @@ import Image from "next/image";
 type Service = {
   icon: string;
   title: string;
-  price: string;
+  price?: string;
   description?: string;
   items: string[];
+  badgeItems?: string[];
   note?: string;
   featured?: boolean;
 };
@@ -132,10 +133,14 @@ const services: Service[] = [
   },
   {
     icon: "/12038.png",
-    title: "FRIONI godišnji program održavanja",
-    price: "12.000 RSD godišnje",
-    description:
-      "Program namenjen korisnicima koji žele maksimalnu brigu o uređaju tokom cele godine.",
+    title: "FRIONI PRO CLUB",
+    description: "Zatvoreni program održavanja za odabrane klijente",
+    badgeItems: [
+      "Uslovi za članstvo",
+      "Ograničen broj mesta",
+      "Prioritet pri planiranju termina",
+    ],
+    note: "Prijava ne garantuje prijem u članstvo",
     items: [
       "Veliki godišnji servis",
       "Prioritet pri zakazivanju termina",
@@ -152,6 +157,7 @@ function ServiceCard({ service }: { service: Service }) {
   const [expanded, setExpanded] = useState(false);
   const hasMore = service.items.length > 3;
   const visibleItems = expanded ? service.items : service.items.slice(0, 3);
+  const isProClub = !!service.badgeItems;
 
   return (
     <div
@@ -170,13 +176,15 @@ function ServiceCard({ service }: { service: Service }) {
             className="object-contain group-hover:scale-110 transition-transform duration-300"
           />
         </div>
-        <span
-          className={`text-sm font-black whitespace-nowrap ${
-            service.featured ? "text-orange-400" : "text-white"
-          }`}
-        >
-          od {service.price}
-        </span>
+        {service.price && (
+          <span
+            className={`text-sm font-black whitespace-nowrap ${
+              service.featured ? "text-orange-400" : "text-white"
+            }`}
+          >
+            od {service.price}
+          </span>
+        )}
       </div>
 
       <h3
@@ -191,35 +199,84 @@ function ServiceCard({ service }: { service: Service }) {
         <p className="text-gray-400 text-xs leading-relaxed mb-3">{service.description}</p>
       )}
 
-      <p className="text-orange-500 text-xs font-semibold tracking-widest uppercase mb-2">
-        Obuhvata:
-      </p>
+      {isProClub ? (
+        <>
+          <ul className="space-y-2 mb-3">
+            {service.badgeItems!.map((item) => (
+              <li key={item} className="flex items-center gap-2">
+                <span className="flex-shrink-0 w-5 h-5 rounded-full bg-orange-500/20 border border-orange-500/40 flex items-center justify-center">
+                  <svg className="w-3 h-3 text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                  </svg>
+                </span>
+                <span className="text-xs text-orange-200 font-medium">{item}</span>
+              </li>
+            ))}
+          </ul>
 
-      <ul className="space-y-1.5">
-        {visibleItems.map((item) => (
-          <li key={item} className="flex items-start gap-2 text-gray-400 text-xs leading-relaxed">
-            <span className="w-1 h-1 rounded-full bg-orange-500 flex-shrink-0 mt-1.5" />
-            {item}
-          </li>
-        ))}
-      </ul>
+          {service.note && (
+            <p className="text-gray-500 text-xs leading-relaxed italic mb-3">
+              {service.note}
+            </p>
+          )}
 
-      {/* Spacer gura dugme na dno */}
-      <div className="flex-1" />
+          <div className="flex-1" />
 
-      {hasMore && (
-        <button
-          onClick={() => setExpanded(!expanded)}
-          className="mt-4 w-full text-xs font-semibold py-2 rounded-lg border border-white/10 text-gray-400 hover:text-white hover:border-orange-500/40 transition-all"
-        >
-          {expanded ? "Vidi manje ↑" : "Vidi više ↓"}
-        </button>
-      )}
+          <button
+            onClick={() => setExpanded(!expanded)}
+            className="mt-2 w-full text-xs font-semibold py-2 rounded-lg border border-orange-500/30 text-orange-400 hover:text-white hover:border-orange-500/60 hover:bg-orange-500/10 transition-all"
+          >
+            {expanded ? "Vidi manje ↑" : "Vidi više ↓"}
+          </button>
 
-      {service.note && (
-        <p className="mt-3 text-gray-500 text-xs leading-relaxed italic border-t border-white/5 pt-3">
-          {service.note}
-        </p>
+          {expanded && (
+            <div className="mt-4 border-t border-white/10 pt-4">
+              <p className="text-orange-500 text-xs font-semibold tracking-widest uppercase mb-2">
+                Program uključuje:
+              </p>
+              <ul className="space-y-1.5">
+                {service.items.map((item) => (
+                  <li key={item} className="flex items-start gap-2 text-gray-300 text-xs leading-relaxed">
+                    <span className="w-1 h-1 rounded-full bg-orange-500 flex-shrink-0 mt-1.5" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </>
+      ) : (
+        <>
+          <p className="text-orange-500 text-xs font-semibold tracking-widest uppercase mb-2">
+            Obuhvata:
+          </p>
+
+          <ul className="space-y-1.5">
+            {visibleItems.map((item) => (
+              <li key={item} className="flex items-start gap-2 text-gray-400 text-xs leading-relaxed">
+                <span className="w-1 h-1 rounded-full bg-orange-500 flex-shrink-0 mt-1.5" />
+                {item}
+              </li>
+            ))}
+          </ul>
+
+          <div className="flex-1" />
+
+          {hasMore && (
+            <button
+              onClick={() => setExpanded(!expanded)}
+              className="mt-4 w-full text-xs font-semibold py-2 rounded-lg border border-white/10 text-gray-400 hover:text-white hover:border-orange-500/40 transition-all"
+            >
+              {expanded ? "Vidi manje ↑" : "Vidi više ↓"}
+            </button>
+          )}
+
+          {service.note && (
+            <p className="mt-3 text-gray-500 text-xs leading-relaxed italic border-t border-white/5 pt-3">
+              {service.note}
+            </p>
+          )}
+        </>
       )}
     </div>
   );

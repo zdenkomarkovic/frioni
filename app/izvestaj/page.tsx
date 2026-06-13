@@ -61,7 +61,7 @@ function validate(d: FormData): Errors {
   return e;
 }
 
-function buildReportHTML(d: FormData): string {
+function buildReportHTML(d: FormData, logoSrc = "/logo.jpg"): string {
   const uslugeItems = d.usluge
     .split("\n")
     .filter((l) => l.trim())
@@ -97,7 +97,7 @@ function buildReportHTML(d: FormData): string {
 <div style="font-family:Arial,sans-serif;background:#fff;width:794px;color:#111;">
 
   <div style="background:#07091a;padding:24px 40px;display:flex;align-items:center;justify-content:space-between;">
-    <img src="/logo.png" height="60" alt="FRIONI" crossorigin="anonymous" />
+    <img src="${logoSrc}" alt="FRIONI" style="height:48px;width:auto;max-width:180px;object-fit:contain;" crossorigin="anonymous" />
     <span style="color:#bbb;font-size:12px;">Servis i održavanje klima uređaja</span>
   </div>
 
@@ -136,7 +136,7 @@ function buildReportHTML(d: FormData): string {
   <div style="padding:20px 40px;border-top:1px solid #eee;text-align:center;">
     <p style="margin:0 0 6px;font-size:14px;color:#555;">Hvala vam na ukazanom poverenju.</p>
     <p style="margin:0;font-size:16px;font-weight:900;color:#111;letter-spacing:1px;">FRIONI</p>
-    <p style="margin:4px 0 0;font-size:12px;color:#888;">Servis i održavanje klima uređaja · <a href="https://www.frioni.rs" style="color:#1d4ed8;text-decoration:none;">www.frioni.rs</a></p>
+    <p style="margin:4px 0 0;font-size:12px;color:#888;">Servis i održavanje klima uređaja · <a id="frioni-link" href="https://www.frioni.rs" style="color:#1d4ed8;text-decoration:none;">www.frioni.rs</a></p>
   </div>
 
   <div style="background:#f8f8f8;padding:14px 40px;border-top:1px solid #e0e0e0;text-align:center;margin-top:16px;">
@@ -148,15 +148,32 @@ function buildReportHTML(d: FormData): string {
 </div>`;
 }
 
+async function logoToBase64(): Promise<string> {
+  return new Promise((resolve) => {
+    const img = new window.Image();
+    img.crossOrigin = "anonymous";
+    img.onload = () => {
+      const c = document.createElement("canvas");
+      c.width = img.naturalWidth;
+      c.height = img.naturalHeight;
+      c.getContext("2d")!.drawImage(img, 0, 0);
+      resolve(c.toDataURL("image/png"));
+    };
+    img.onerror = () => resolve("/logo.jpg");
+    img.src = "/logo.jpg?" + Date.now();
+  });
+}
+
 async function generisiPDF(data: FormData) {
-  const [{ default: html2canvas }, { default: jsPDF }] = await Promise.all([
+  const [{ default: html2canvas }, { default: jsPDF }, logoSrc] = await Promise.all([
     import("html2canvas"),
     import("jspdf"),
+    logoToBase64(),
   ]);
 
   const container = document.createElement("div");
   container.style.cssText = "position:fixed;top:-99999px;left:-99999px;width:794px;";
-  container.innerHTML = buildReportHTML(data);
+  container.innerHTML = buildReportHTML(data, logoSrc);
   document.body.appendChild(container);
 
   await new Promise<void>((resolve) => {
@@ -169,6 +186,21 @@ async function generisiPDF(data: FormData) {
       else { img.onload = done; img.onerror = done; }
     });
   });
+
+  // Izmeri poziciju linka pre renderovanja
+  const linkEl = container.querySelector<HTMLAnchorElement>("#frioni-link");
+  const containerRect = container.getBoundingClientRect();
+  type LinkBounds = { x: number; y: number; w: number; h: number };
+  let linkPx: LinkBounds | null = null;
+  if (linkEl) {
+    const r = linkEl.getBoundingClientRect();
+    linkPx = {
+      x: r.left - containerRect.left,
+      y: r.top - containerRect.top,
+      w: r.width,
+      h: r.height,
+    };
+  }
 
   const canvas = await html2canvas(container, {
     scale: 2,
@@ -184,14 +216,31 @@ async function generisiPDF(data: FormData) {
 
   const A4_W = 210;
   const A4_H = 297;
+  const pxToMm = A4_W / 794;
   const imgH = A4_W * (canvas.height / canvas.width);
+
+  function addLink(pageYOffsetPx: number) {
+    if (!linkPx) return;
+    const yOnPage = (linkPx.y - pageYOffsetPx) * pxToMm;
+    if (yOnPage < 0 || yOnPage > A4_H) return;
+    doc.link(
+      linkPx.x * pxToMm,
+      yOnPage,
+      linkPx.w * pxToMm,
+      linkPx.h * pxToMm,
+      { url: "https://www.frioni.rs" },
+    );
+  }
 
   if (imgH <= A4_H) {
     doc.addImage(imgData, "JPEG", 0, 0, A4_W, imgH);
+    addLink(0);
   } else {
     const sliceH = Math.floor(canvas.width * (A4_H / A4_W));
+    const containerPageH = sliceH / 2; // canvas je 2x, kontejner je 1x
     let yOffset = 0;
     let first = true;
+    let pageIndex = 0;
     while (yOffset < canvas.height) {
       if (!first) doc.addPage();
       first = false;
@@ -201,7 +250,9 @@ async function generisiPDF(data: FormData) {
       slice.height = h;
       slice.getContext("2d")!.drawImage(canvas, 0, yOffset, canvas.width, h, 0, 0, canvas.width, h);
       doc.addImage(slice.toDataURL("image/jpeg", 0.95), "JPEG", 0, 0, A4_W, A4_W * (h / canvas.width));
+      addLink(pageIndex * containerPageH);
       yOffset += sliceH;
+      pageIndex++;
     }
   }
 
@@ -250,7 +301,7 @@ export default function IzvestajPage() {
       <div className="max-w-2xl mx-auto">
 
         <div className="text-center mb-10">
-          <Image src="/logo.png" alt="FRIONI logo" width={120} height={40} className="h-24 w-auto mx-auto mb-4" />
+          <Image src="/logo.jpg" alt="FRIONI logo" width={120} height={40} className="h-24 w-auto mx-auto mb-4" />
           <h1 className="text-2xl font-black text-white uppercase tracking-widest">
             Izveštaj o izvršenom servisu
           </h1>
