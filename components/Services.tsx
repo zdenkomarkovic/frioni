@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { CONTACT_PHONE_HREF, CONTACT_PHONE } from "@/lib/constants";
 
 type Service = {
   icon: string;
@@ -12,6 +13,7 @@ type Service = {
   badgeItems?: string[];
   note?: string;
   featured?: boolean;
+  coverImage?: string;
 };
 
 const services: Service[] = [
@@ -134,21 +136,8 @@ const services: Service[] = [
   {
     icon: "/12038.png",
     title: "FRIONI PRO CLUB",
-    description: "Zatvoreni program održavanja za odabrane klijente",
-    badgeItems: [
-      "Uslovi za članstvo",
-      "Ograničen broj mesta",
-      "Prioritet pri planiranju termina",
-    ],
-    note: "Prijava ne garantuje prijem u članstvo",
-    items: [
-      "Veliki godišnji servis",
-      "Prioritet pri zakazivanju termina",
-      "Evidenciju uređaja i izvršenih intervencija",
-      "Podsetnik za naredni servis",
-      "Elektronsku dokumentaciju svih izvršenih radova",
-      "Savetodavnu podršku tokom trajanja pretplate",
-    ],
+    items: [],
+    coverImage: "/20260614_005037.jpg",
     featured: true,
   },
 ];
@@ -158,6 +147,33 @@ function ServiceCard({ service }: { service: Service }) {
   const hasMore = service.items.length > 3;
   const visibleItems = expanded ? service.items : service.items.slice(0, 3);
   const isProClub = !!service.badgeItems;
+
+  if (service.coverImage) {
+    return (
+      <div className="group flex flex-col h-full rounded-2xl overflow-hidden border border-orange-500/40 hover:border-orange-500/70 transition-all duration-300 bg-gradient-to-b from-blue-950/60 to-orange-950/40">
+        <div className="relative w-full h-56 sm:h-64 flex-shrink-0">
+          <Image
+            src={service.coverImage}
+            alt={service.title}
+            fill
+            className="object-cover"
+          />
+        </div>
+        <div className="flex flex-1 items-end p-6">
+          <a
+            href={CONTACT_PHONE_HREF}
+            className="w-full flex items-center justify-center gap-2 py-3 rounded-xl font-bold text-sm text-white hover:opacity-90 transition-all"
+            style={{ backgroundImage: "linear-gradient(to right, #1d4ed8 35%, #ea580c 65%)" }}
+          >
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+            </svg>
+            {CONTACT_PHONE}
+          </a>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div

@@ -1,7 +1,6 @@
 "use client";
 
-import { useActionState } from "react";
-import { submitContact, type ContactFormState } from "@/app/actions/contact";
+import { useState } from "react";
 import Image from "next/image";
 import { FaViber } from "react-icons/fa";
 import {
@@ -13,18 +12,22 @@ import {
   CONTACT_ADDRESS,
 } from "@/lib/constants";
 
-const initialState: ContactFormState = {
-  success: false,
-  message: "",
+type FormState = {
+  success: boolean;
+  message: string;
+  errors?: Partial<Record<string, string[]>>;
 };
 
 const tipServisaOptions = [
-  "Mali servis klima uređaja",
-  "Veliki servis klima uređaja",
-  "Čišćenje spoljašnje jedinice",
+  "Standard servis klima uređaja",
+  "Dubinsko mašinsko čišćenje unutrašnje jedinice",
+  "Servis spoljašnje jedinice",
   "Dijagnostika kvara",
-  "Dopuna rashladnog plina",
-  "Servis inverter klima uređaja",
+  "Zamena startnog kondenzatora kompresora",
+  "Zamena izolacije freonske instalacije",
+  "Drenažna rešenja",
+  "Veliki godišnji servis",
+  "FRIONI PRO CLUB",
   "Nešto drugo",
 ];
 
@@ -50,7 +53,46 @@ const inputClass =
   "bg-[#0a0f20] border border-white/10 rounded-lg px-4 py-3 text-white text-sm placeholder:text-gray-600 focus:outline-none focus:border-orange-500/60 transition-colors";
 
 export default function ContactForm() {
-  const [state, action, pending] = useActionState(submitContact, initialState);
+  const [state, setState] = useState<FormState>({ success: false, message: "" });
+  const [pending, setPending] = useState(false);
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setPending(true);
+
+    const form = e.currentTarget;
+    const data = {
+      ime: (form.elements.namedItem("ime") as HTMLInputElement).value,
+      email: (form.elements.namedItem("email") as HTMLInputElement).value,
+      telefon: (form.elements.namedItem("telefon") as HTMLInputElement).value,
+      tipServisa: (form.elements.namedItem("tipServisa") as HTMLSelectElement).value,
+      brojKlima: (form.elements.namedItem("brojKlima") as HTMLInputElement).value,
+      adresa: (form.elements.namedItem("adresa") as HTMLInputElement).value,
+      opstina: (form.elements.namedItem("opstina") as HTMLInputElement).value,
+      opis: (form.elements.namedItem("opis") as HTMLTextAreaElement).value,
+      saglasnost: (form.elements.namedItem("saglasnost") as HTMLInputElement).checked
+        ? "on"
+        : "",
+    };
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      const json = await res.json();
+      setState(json);
+    } catch {
+      setState({
+        success: false,
+        message: "Greška pri slanju. Pokušajte ponovo ili nas pozovite direktno.",
+      });
+    } finally {
+      setPending(false);
+    }
+  }
 
   return (
     <section id="kontakt" className="py-20 bg-[#050810]">
@@ -85,7 +127,7 @@ export default function ContactForm() {
                 <p className="text-gray-400 text-sm">{state.message}</p>
               </div>
             ) : (
-              <form action={action} className="space-y-4">
+              <form onSubmit={handleSubmit} className="space-y-4">
                 {state.message && !state.success && (
                   <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-3 text-orange-400 text-sm">
                     {state.message}
@@ -280,7 +322,7 @@ export default function ContactForm() {
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
-                      d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                      d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2 2v10a2 2 0 002 2z"
                     />
                   </svg>
                 </div>

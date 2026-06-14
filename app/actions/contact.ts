@@ -1,6 +1,7 @@
 "use server";
 
 import { z } from "zod";
+import nodemailer from "nodemailer";
 
 const schema = z.object({
   ime: z.string().min(2, "Unesite ime i prezime"),
@@ -24,16 +25,19 @@ export async function submitContact(
   _prevState: ContactFormState,
   formData: FormData,
 ): Promise<ContactFormState> {
+  console.log("[contact] formData keys:", [...formData.keys()]);
+  console.log("[contact] ime:", formData.get("ime"), "| telefon:", formData.get("telefon"), "| email:", formData.get("email"));
+
   const raw = {
-    ime: formData.get("ime"),
-    email: formData.get("email"),
-    telefon: formData.get("telefon"),
-    brojKlima: formData.get("brojKlima"),
-    tipServisa: formData.get("tipServisa"),
-    adresa: formData.get("adresa"),
-    opstina: formData.get("opstina"),
-    opis: formData.get("opis"),
-    saglasnost: formData.get("saglasnost"),
+    ime: formData.get("ime") ?? "",
+    email: formData.get("email") ?? "",
+    telefon: formData.get("telefon") ?? "",
+    brojKlima: formData.get("brojKlima") ?? "",
+    tipServisa: formData.get("tipServisa") ?? "",
+    adresa: formData.get("adresa") ?? "",
+    opstina: formData.get("opstina") ?? "",
+    opis: formData.get("opis") ?? "",
+    saglasnost: formData.get("saglasnost") ?? "",
   };
 
   const result = schema.safeParse(raw);
@@ -60,31 +64,26 @@ export async function submitContact(
     opis ? `<p><strong>Opis problema:</strong> ${opis}</p>` : "",
   ].filter(Boolean).join("\n");
 
-  const res = await fetch("https://api.mailjet.com/v3.1/send", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Basic ${Buffer.from(
-        `${process.env.MAILJET_API_KEY}:${process.env.MAILJET_SECRET_KEY}`
-      ).toString("base64")}`,
-    },
-    body: JSON.stringify({
-      Messages: [
-        {
-          From: {
-            Email: process.env.SITE_MAIL_SENDER,
-            Name: "FRIONI Servis",
-          },
-          To: [{ Email: process.env.SITE_MAIL_RECEIVER }],
-          ReplyTo: { Email: email, Name: ime },
-          Subject: `Novi zahtev za servis – ${ime}`,
-          HTMLPart: emailBody,
-        },
-      ],
-    }),
-  });
+  try {
+    const transporter = nodemailer.createTransport({
+      host: process.env.SMTP_HOST,
+      port: Number(process.env.SMTP_PORT ?? "465"),
+      secure: (process.env.SMTP_PORT ?? "465") === "465",
+      auth: {
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS,
+      },
+    });
 
-  if (!res.ok) {
+    await transporter.sendMail({
+      from: `"FRIONI Servis" <${process.env.SMTP_USER}>`,
+      to: process.env.SITE_MAIL_RECEIVER,
+      replyTo: `"${ime}" <${email}>`,
+      subject: `Novi zahtev za servis – ${ime}`,
+      html: emailBody,
+    });
+  } catch (err) {
+    console.error("[contact] SMTP error:", err);
     return {
       success: false,
       message: "Greška pri slanju. Pokušajte ponovo ili nas pozovite direktno.",
